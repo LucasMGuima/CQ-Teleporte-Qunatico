@@ -1,0 +1,50 @@
+# Python
+*.pyc
+__pycache__/
+.env
+venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.ps
+*.run.xml
+*.snm
+*.synctex.gz
+*.thm
+*.toc
+*.vrb
+*.xdv
+*.gz
+_minted*/
+minted-*.pyg
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Qiskit / IBM Quantum
+qiskit_ibm_runtime/
+qiskit-qobj-*.json
+qiskit-*.log
+credentials.json
