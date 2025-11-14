@@ -1,0 +1,366 @@
+\documentclass[12pt, a4paper]{article}
+
+% Pacotes úteis
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref} % Para links
+\usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry} % Margens
+
+% --- Comando para definir o caminho das imagens ---
+% O caminho deve terminar sempre com uma barra (/)
+\graphicspath{{../notebook/imgs/}}
+
+\title{Estudo sobre o Teleporte Quântico}
+\author{Lucas da Mata Guimarães}
+\date{\today}
+
+\begin{document}
+
+\maketitle % Gera a página de título
+
+\begin{abstract}
+Este estudo apresenta os princípios fundamentais do teletransporte quântico, 
+uma técnica que permite a transferência do estado quântico de uma partícula 
+de um local para outro, sem a necessidade de deslocamento físico da matéria.
+Apresentando três aplicações conceituais deste protocolo e o que podemos inferir
+a partir destas em relação a viabilidade do teleporte quântico.
+Discutindo qual a contribuição do \textbf{emaranhamento quântico} e as 
+implicações do \textbf{Teorema No-Cloning} (Não-Clonagem) da computação quântica
+trazem para o modo como transferimos informações.
+\end{abstract}
+
+\tableofcontents % Gera o sumário
+
+\newpage % Começa o conteúdo principal em uma nova página
+
+\section{Introdução ao Teletransporte Quântico}
+
+O teletransporte quântico é um fenômeno fascinante da mecânica quântica, 
+que se distingue da ficção científica por não envolver o teletransporte de 
+matéria ou energia, mas sim a transferência de informação quântica, que 
+nomeamos estado quântico, de um sistema para outro. Essa informação é 
+codificada em qubits (bits quânticos).
+
+\section{Princípios Fundamentais}
+
+\subsection{O Qubit e o Estado Quântico}
+
+Um qubit é a unidade básica de informação quântica, que pode ser um dos estados
+$|0\rangle$ ou $|1\rangle$, ou estar em superposição, isto é, ter uma chance
+$\alpha$ de estar no estado $|0\rangle$ e $\beta$ de estar no estado $|1\rangle$.
+Formalmente representamos um estado quântico pela seguinte fórmula:
+
+\begin{equation}
+    \label{eq:estado_quantico}
+    |\psi\rangle = \alpha|0\rangle + \beta|1\rangle
+\end{equation} 
+
+Onde $|\alpha|^2 + |\beta|^2 = 1$. O objetivo do teletransporte é transferir 
+o valor de $(\alpha, \beta)$ de um local (Alice) para outro (Bob).
+
+Quando encontramos um estado que possui a seguinte forma,
+
+\begin{equation}
+    \label{eq:estado_superposicao}
+    |\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle 
+\end{equation}
+
+dizemos que temos um \textbf{estado em superposição}, isto é, quando medirmos o valor
+deste estado, temos uma chance de lermos $|0\rangle$ ou $|1\rangle$.
+
+\subsection{Mais de um Qubit}
+
+Para representar um qubit, utilizamos a representação de estado como
+$|0\rangle$ e $|1\rangle$, que mostra todos os estados possíveis desse
+qubit, mas e quando trabalhamos com mais de um?
+
+Tomemos como exemplo, utilizar dois qubits, assim, representamos seus
+estados possíveis como, $|00\rangle$, $|01\rangle$, $|10\rangle$ e 
+$|11\rangle$. Mostrando todas as combinações que podemos encontrar
+esses dois qubits. De um modo geral, a equação do estado é
+semelhante a equação \ref{eq:estado_quantico}:
+
+\begin{equation}
+    \label{eq:esqto_qunatico2qubit}
+    |\psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle
+\end{equation}
+
+Onde novamente, $|\alpha|^2 + |\beta|^2 + |\gamma|^2 + |\delta|^2 = 1$.
+
+\subsection{Emaranhamento Quântico (Entanglement)}
+
+O teletransporte quântico é impossível sem um par de partículas emaranhadas 
+compartilhado entre os dois comunicadores, Alice e Bob. O estado emaranhado 
+mais comum é o Estado de Bell $\Phi^+$:
+
+\begin{equation}
+    \label{eq:estado_bellPhiPlus}
+    |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+\end{equation}
+
+Aqui, podemos ver que, mesmo trabalhando com 2 qubits, o a equação \ref{eq:estado_bellPhiPlus}
+é menor que a equação \ref{eq:esqto_qunatico2qubit}. Isso é devido ao emaranhamento,
+pois, os dois qubits assumem sempre o mesmo valor, isto é, os únicos
+estados possíveis de se encontrar nosso sistema após o emaranhamento são
+$|00\rangle$ e $|11\rangle$.
+
+Este emaranhamento atua como um \textbf{canal quântico} para a transferência de informação.
+
+\section{O Processo de Teletransporte}
+O processo envolve três etapas principais:
+
+\begin{enumerate}
+    \item \textbf{Medição de Bell por Alice:} Alice realiza uma medição conjunta 
+    (Medição de Bell) no seu qubit de entrada ($|\psi\rangle$) e em uma das partículas 
+    do par emaranhado. Esta medição destrói o estado original $|\psi\rangle$ 
+    (devido ao Teorema No-Cloning), mas codifica a informação necessária para a reconstrução. 
+    O resultado é um dos quatro estados de Bell.
+    \item \textbf{Comunicação Clássica:} Alice envia o resultado da sua medição 
+    (2 bits de informação clássica) para Bob.
+    \item \textbf{Reconstrução por Bob:} Bob aplica uma operação unitária de correção 
+    (uma das quatro transformações de Pauli, $I, X, Y, Z$) na sua partícula emaranhada, 
+    com base nos 2 bits de informação clássica recebidos, o que a transforma no estado 
+    original $|\psi\rangle$.
+\end{enumerate}
+
+\section{Experimento}
+
+Os experimentos a seguir, têm como intuito analisar a capacidade do teleporte quântico,
+transferindo a informação de um qubit para outro. Foram realizados para cada experimento
+duas simulações e uma execução utilizando a IBM Plataforma Quantum. A codificação foi
+realizada utilizando a SDK Qiskit.
+
+\subsection{Teleporte Quântico de 1 Qubit}
+
+O seguinte circuito foi desenvolvido para analisar o protocolo de teleporte quântico
+do estado de um qubit.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Circuito: Teleporte Quântico de 1 qubit}
+    \includegraphics[width=1\textwidth]{circuito_teleport_1qubit.png}
+    \label{fig:circ_1qubit}
+\end{figure}
+
+Na configuração apresentada, preparamos o qubit $Q$, com o estado $|1\rangle$,
+e queremos passar esse estado para o qubit $Bob$, primeiro, vamos simular o
+circuito.
+
+Quando simulamos o circuito sem considerar o ruído encontramos o seguinte
+cenário.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação sem ruído}
+    \includegraphics[width=0.75\textwidth]{plot_1qubit_semRuido.png}
+    \label{fig:plot_1qubit_semRuido}
+\end{figure}
+
+Agora quando levamos em consideração o ruído que encontramos em computadores
+quânticos, temos os seguintes resultados na simulação.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação com ruído}
+    \includegraphics[width=0.75\textwidth]{plot_1qubit_comRuido.png}
+    \label{fig:plot_1qubit_comRuido}
+\end{figure}
+
+Quando consideramos o ruído, começamos a ver que em algumas de nossas medições
+encontramos o estado $|0\rangle$ no qubit $Bob$, porém o ruído é tão pequeno
+que o desconsideramos.
+
+Para comparação, o circuito foi executado em um computador quântico disponibilizado
+pela IBM, e os resultados encontrados se assemelham à simulação com ruído.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na execução na Plataforma IBM Quantum}
+    \includegraphics[width=0.75\textwidth]{plot_1qubit_ibm.png}
+    \label{fig:plot_1qubit_ibm}
+\end{figure}
+
+Para as análises feitas, foram realizados $1000$ testes, para ter uma coleta relevante
+e confiável da informação. Isso nos mostra que na simulação com ruído 
+\ref{fig:plot_1qubit_comRuido}, medimos o estado $|1\rangle$ um total de $986$ vezes, 
+e na execução em um computador quântico \ref{fig:plot_1qubit_ibm}, medimos o estado
+$|1\rangle$ um total de $963$ vezes.
+
+\subsection{Teleporte Quântico Superposição}
+
+A computação quântica, tem como principais fundamentos a superposição quântica,
+logo seria vantajoso conseguirmos fazer o teleporte deste estado.
+
+Para isso, o seguinte circuito foi proposto.
+
+\begin{figure}[H]
+    \centering
+    \caption{Circuito: Teleporte Quântico em Superposição}
+    \includegraphics[width=1\textwidth]{circuito_teleport_superposicao.png}
+    \label{fig:circ_superposicao}
+\end{figure}
+
+Na figura acima \ref{fig:circ_superposicao}, preparamos no qubit $Q$ o seguinte estado
+de superposição,
+
+\begin{equation}
+    \label{eq:circ_superposicao}
+    |\phi\rangle =  \frac{-i}{\sqrt{2}}|0\rangle + \frac{i}{\sqrt{2}}|1\rangle.
+\end{equation}
+
+A simulação desconsiderando o ruído do circuito \ref{fig:circ_superposicao},
+serve para vermos se o circuito é teoricamente viável, e para este os resultados
+encontrados foram.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação sem ruído}
+    \includegraphics[width=0.75\textwidth]{plot_superposicao_semRuido.png}
+    \label{fig:plot_super_semRuido}
+\end{figure}
+
+Os resultados nos indicam que o circuito é viavel, visto que, temos uma
+distribuição de mais ou menos $50\%$ entre os estados $|0\rangle$ e $|1\rangle$,
+que representa superposição desejada.
+
+Quando levamos em consideração o ruído, encontramos o seguinte resultado.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação com ruído}
+    \includegraphics[width=0.75\textwidth]{plot_superposicao_comRuido.png}
+    \label{fig:plot_super_comRuido}
+\end{figure}
+
+Nesta situação, o ruído se mistura com os resultados possíveis, visto que
+ao medirmos apenas um qubit os estados possíveis são apenas $|0\rangle$ e
+$|1\rangle$.
+
+Ao executarmos o circuito em um computador quântico, os resultados obtidos foram.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na execução na Plataforma IBM Quantum}
+    \includegraphics[width=0.75\textwidth]{plot_superposicao_ibm.png}
+    \label{fig:plot_super_ibm}
+\end{figure}
+
+Assim como na análise com ruído \ref{fig:plot_super_comRuido}, o ruído
+característico de um computador quântico, se mescla aos resultados possíveis
+ao utilizarmos de um computador quântico real.
+
+\subsection{Teleporte Quântico $N$ Qubits}
+
+Para uma Comunicação ser viável precisamos passar mais de um bit ou qubit
+por vez, para analisar essa situação, o seguinte circuito de teleporte 
+quântico de 2 qubits foi elaborado.
+
+\begin{figure}[H]
+    \centering
+    \caption{Circuito: Teleporte Quântico 2 Qubits}
+    \includegraphics[width=1\textwidth]{circuito_teleport_nQubits.png}
+    \label{fig:circ_nQubits}
+\end{figure}
+
+Neste circuito preparamos o estado $|01\rangle$ nos qubits de $Q$ para ser
+teleportado para $Bob_{0}$ e $Bob_{1}$.
+
+A viabilidade teórica desse circuito pode ser verificada na simulação sem
+ruído, que apresentou os seguintes resultados.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação sem ruído}
+    \includegraphics[width=0.75\textwidth]{plot_nQubits_semRuido.png}
+    \label{fig:plot_nQubits_semRuido}
+\end{figure}
+
+Comprovando que podemos teoricamente teleportar o estado de 2 qubits.
+
+Quando adicionamos o ruído que ocorre normalmente em computadores quânticos
+os resultados encontrados são.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na simulação com ruído}
+    \includegraphics[width=0.75\textwidth]{plot_nQubits_comRuido.png}
+    \label{fig:plot_nQubits_comRuido}
+\end{figure}
+
+Assim como visto nos casos anteriores onde adicionamos o ruído, ele adiciona
+uma leve flutuação do valor, porém continua claro qual o resultado verdadeiro.
+Uma ocorrência interessante nesta análise, é que o estado $|10\rangle$ nunca
+ocorreu durante os testes executados.
+
+A título de comparação, o circuito foi avaliado em um computador quântico
+real, e os seguintes resultados foram encontrados.
+
+\begin{figure}[H]
+    \centering
+    \caption{Resultados na execução na Plataforma IBM Quantum}
+    \includegraphics[width=0.75\textwidth]{plot_nQubit_ibm.png}
+    \label{fig:plot_nQubits_ibm}
+\end{figure}
+
+Assim como os resultados encontrados na simulação com ruído \ref{fig:plot_nQubits_comRuido},
+aqui vemos que o estado $|10\rangle$ novamente não ocorre, e os resultados
+são novamente semelhantes à simulação com ruído.
+
+Esse fenômeno onde o estado $|10\rangle$ não ocorre tanto na simulação \ref{fig:plot_nQubits_comRuido},
+quanto em um computador quântico real \ref{fig:plot_nQubits_ibm},
+necessita de um estudo próprio, pode vir a ser relativo ao emaranhamento
+entre os qubits $Alice_{0} \space Bob_{0}$ e $Alice_{1} \space Bob_{1}$,
+mas um estudo mais aprofundado se faz necessário. 
+
+\section{Conclusão}
+As vantagens que os protocolos de comunicação quântica trazem ao jogo são a 
+segurança e a eficiência (ou densidade de dados).
+
+Na questão de segurança, o ganho advém do uso do emaranhamento quântico e 
+do Teorema da Não-Clonagem.
+
+Dentro do Teleporte Quântico, qualquer tentativa de medir ou interceptar 
+o estado em trânsito colapsaria o estado quântico, destruindo assim a 
+informação e alertando as partes envolvidas sobre a espionagem. Isso é 
+usado como base para a Distribuição de Chaves Quânticas (QKD), que garante 
+uma chave criptográfica mais segura.
+
+Na Comunicação Densa, utiliza-se também um par de qubits emaranhados 
+previamente compartilhados, para passar dois bits de informação clássica 
+usando apenas um qubit entre as partes, explorando o par pré-compartilhado 
+de qubits emaranhados.
+
+Quando falamos de velocidade, podemos atrelar a eficiência ao protocolo.
+
+No Teleporte Quântico, a velocidade de transferência do estado quântico é 
+limitada pela velocidade de transmissão da informação clássica (os dois bits), 
+necessária para que o receptor reconstrua o estado teleportado. 
+O emaranhamento, de fato, não se limita pela velocidade da luz, 
+sendo instantâneo. Mas o ponto forte do protocolo está na transferência 
+fiel do estado quântico, crucial para a Internet Quântica, permitindo 
+estender as redes quânticas sem o risco de perda de decoerência que 
+acontece em repetidores clássicos.
+
+Dentro da Comunicação Densa, temos a vantagem na densidade de dados, 
+permitindo o envio do dobro de informação clássica (dois bits) usando o 
+canal quântico de um qubit. Isso traz uma maior densidade de dados para a 
+comunicação.
+
+\newpage
+
+\section*{Referências}
+\addcontentsline{toc}{section}{Referências} % Adiciona as referências ao sumário
+% Adicione suas referências aqui no formato desejado. Exemplo:
+
+\begin{description}
+    \item[1] Matthew Silverman, "Quantum Teleportation | PennyLane Demos", \\ \url{https://pennylane.ai/qml/demos/tutorial_teleportation}
+    \item[2] IBM Quantum, "Quantum Teleportation", \\ \url{https://quantum.cloud.ibm.com/learning/pt/courses/basics-of-quantum-information/entanglement-in-action/quantum-teleportation}
+    \item[3] Yanofsky, N. S.; Mannucci, M. A. \par Quantum Computing for Computer Scientists. Cambridge: Cambridge University Press, 2008.
+\end{description}
+
+\end{document}
